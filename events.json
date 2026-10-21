@@ -15,13 +15,14 @@
         "Detailed list of events, schedule, rules, and regulations apply to the various competitions."
       ],
       "brochure": "https://drive.google.com/file/d/19O8jaRIb15OfVUegg-QDu3rK4dxzaYdk/view?usp=drivesdk",
-      "register": "",
+      "register": "https://docs.google.com/forms/d/e/1FAIpQLSfQBMwiR1xgLUvsYttIuoCfocFc60vwy7hED8XJ73kOh2_oLA/viewform",
       "contact": {
         "email": "forceapj@gmail.com",
         "phone": "+91 98715 28385"
       },
       "id": "force-fest-2k26-2026-10-27",
-      "source": "19O8jaRIb15OfVUegg-QDu3rK4dxzaYdk"
+      "source": "19O8jaRIb15OfVUegg-QDu3rK4dxzaYdk",
+      "formId": "1XtCaO2mPqKLHnPLgSjhH1KsKnE4gSQglFzRZRek4Rf8"
     },
     {
       "name": "Technophilia 7.0 - Autonomous AI Eco Agents",
@@ -45,12 +46,13 @@
         "All participants must report at 07:45 am sharp."
       ],
       "brochure": "https://drive.google.com/file/d/1ul9v33rLRcAYDkgg7C5rxrFFz6y3hz8k/view?usp=drivesdk",
-      "register": "",
+      "register": "https://docs.google.com/forms/d/e/1FAIpQLSdHcavxFIb6CLMMbUVvgrNm8SyCNJgdZbOu9SDlgbUQiqNmAw/viewform",
       "contact": {
         "phone": "9210847689"
       },
       "id": "technophilia-7-0-autonomous-ai-eco-agents-2026-10-31",
-      "source": "1ul9v33rLRcAYDkgg7C5rxrFFz6y3hz8k"
+      "source": "1ul9v33rLRcAYDkgg7C5rxrFFz6y3hz8k",
+      "formId": "1VpP4zf5KPrZgG1dC_BZvgfCnFXrYftgusaCH3_VEbTI"
     },
     {
       "name": "AlphaBit '26",
@@ -68,13 +70,15 @@
         "2 Participants per team"
       ],
       "brochure": "https://drive.google.com/file/d/1vxhe5SiDN5lBjZKcUF7IeZ-D_q06YA3O/view?usp=drivesdk",
-      "register": "https://forms.gle/1ULbC52iGeH2R1QM7",
+      "register": "https://docs.google.com/forms/d/e/1FAIpQLSf85XyfDYeoU8h0WfILo-Vs0ED_dCqJTb5pdZ1_FJ4BnBL5hQ/viewform",
       "contact": {
         "email": "principal@aiss.amity.edu.in",
         "phone": "+91 98912 10425"
       },
       "id": "alphabit-26-2026-11-06",
-      "source": "1vxhe5SiDN5lBjZKcUF7IeZ-D_q06YA3O"
+      "source": "1vxhe5SiDN5lBjZKcUF7IeZ-D_q06YA3O",
+      "organiserLink": "https://forms.gle/1ULbC52iGeH2R1QM7",
+      "formId": "1bvMW33-v2LHPrh4uqmVoNx_yyStPBT1P2FLREqATkz8"
     },
     {
       "name": "Aqua Regia - The School Quiz",
@@ -93,10 +97,11 @@
         "If either member is unable to attend the next round, the team will be disqualified."
       ],
       "brochure": "https://drive.google.com/file/d/1maK3cNnzKBe2uzPDVLeb-VNteCxjqsj8/view?usp=drivesdk",
-      "register": "",
+      "register": "https://docs.google.com/forms/d/e/1FAIpQLSdQnj4ePy7g5s8Ze8duzatBbRQmN_6Lej-7GD1PhWsYcvpONA/viewform",
       "contact": {},
       "id": "aqua-regia-the-school-quiz",
-      "source": "1maK3cNnzKBe2uzPDVLeb-VNteCxjqsj8"
+      "source": "1maK3cNnzKBe2uzPDVLeb-VNteCxjqsj8",
+      "formId": "1oa0DxVkOKtZnomIYdvpKMa0rUnF88FMRv5tqlYnUJ7M"
     }
   ]
 }
