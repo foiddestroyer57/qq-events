@@ -8,7 +8,6 @@ DEFAULT_QUESTIONS = [
     {"title": "School name", "type": "short", "required": True},
     {"title": "Student / parent mobile number", "type": "short", "required": True},
     {"title": "Email address", "type": "short", "required": True},
-    {"title": "Teacher in charge (name and mobile number)", "type": "short", "required": False},
     {"title": "Anything else we should know?", "type": "paragraph", "required": False},
     {"title": "Consent", "type": "checkbox", "required": True, "options": ["I confirm the details are correct and a parent/guardian agrees to this registration."]},
 ]
