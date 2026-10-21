@@ -25,6 +25,8 @@ jobs:
           DRIVE_FOLDER_ID: ${{ secrets.DRIVE_FOLDER_ID }}
           SA_JSON: ${{ secrets.GOOGLE_SA_JSON }}
           ADMIN_EMAIL: ${{ secrets.ADMIN_EMAIL }}
+          FORM_HELPER_URL: ${{ secrets.FORM_HELPER_URL }}
+          FORM_HELPER_KEY: ${{ secrets.FORM_HELPER_KEY }}
         run: |
           printf '%s' "$SA_JSON" > "$RUNNER_TEMP/key.json"
           GOOGLE_SERVICE_ACCOUNT_JSON="$RUNNER_TEMP/key.json" python auto_update.py
