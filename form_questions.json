@@ -1,0 +1,45 @@
+[
+  {
+    "title": "Student name",
+    "type": "short",
+    "required": true
+  },
+  {
+    "title": "Class and section",
+    "type": "short",
+    "required": true
+  },
+  {
+    "title": "School name",
+    "type": "short",
+    "required": true
+  },
+  {
+    "title": "Student / parent mobile number",
+    "type": "short",
+    "required": true
+  },
+  {
+    "title": "Email address",
+    "type": "short",
+    "required": true
+  },
+  {
+    "title": "Teacher in charge (name and mobile number)",
+    "type": "short",
+    "required": false
+  },
+  {
+    "title": "Anything else we should know?",
+    "type": "paragraph",
+    "required": false
+  },
+  {
+    "title": "Consent",
+    "type": "checkbox",
+    "required": true,
+    "options": [
+      "I confirm the details are correct and a parent/guardian agrees to this registration."
+    ]
+  }
+]
