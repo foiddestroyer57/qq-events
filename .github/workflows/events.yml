@@ -24,6 +24,8 @@ jobs:
           GEMINI_API_KEY: ${{ secrets.GEMINI_API_KEY }}
           DRIVE_FOLDER_ID: ${{ secrets.DRIVE_FOLDER_ID }}
           SA_JSON: ${{ secrets.GOOGLE_SA_JSON }}
+          ADMIN_EMAIL: ${{ secrets.ADMIN_EMAIL }}
+          RESPONSES_SHEET_ID: ${{ secrets.RESPONSES_SHEET_ID }}
         run: |
           printf '%s' "$SA_JSON" > "$RUNNER_TEMP/key.json"
           GOOGLE_SERVICE_ACCOUNT_JSON="$RUNNER_TEMP/key.json" python auto_update.py
