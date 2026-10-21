@@ -1,3 +1,51 @@
 {
-  "events": []
+  "events": [
+    {
+      "name": "FORCE FEST 2K26",
+      "category": "Technology and Innovation Festival",
+      "date": "2026-10-27",
+      "venue": "Apeejay School, Panchsheel Park",
+      "classes": "III - XII",
+      "fee": "",
+      "deadline": "2026-10-15",
+      "registerOpens": "",
+      "description": "Apeejay School, Panchsheel Park presents the 25th edition of FORCE FEST 2K26, a flagship technology and innovation festival themed 'TechnoGenesis: Evolution with Technology'. The festival provides exceptionally talented students a dynamic platform to explore, create, innovate, and showcase their technological prowess across various exciting competitions. Events range from PC gaming and block coding to robotics, quizzes, app development, and more.",
+      "rules": [
+        "Kindly confirm participation in the respective events by October 15, 2026.",
+        "Detailed list of events, schedule, rules, and regulations apply to the various competitions."
+      ],
+      "brochure": "https://drive.google.com/file/d/19O8jaRIb15OfVUegg-QDu3rK4dxzaYdk/view?usp=drivesdk",
+      "register": "",
+      "contact": {
+        "email": "forceapj@gmail.com",
+        "phone": "+91 98715 28385"
+      },
+      "id": "force-fest-2k26-2026-10-27",
+      "source": "19O8jaRIb15OfVUegg-QDu3rK4dxzaYdk"
+    },
+    {
+      "name": "AlphaBit '26",
+      "category": "Technology Festival / Tech Fest",
+      "date": "2026-11-06",
+      "venue": "Amity International School, Saket",
+      "classes": "IX-XII",
+      "fee": "",
+      "deadline": "2026-10-20",
+      "registerOpens": "2026-10-01",
+      "description": "Amity International School, Saket presents AlphaBit '26, an annual tech fest fostering innovation and providing a platform for young minds to connect, share ideas, and explore the ever-evolving landscape of technology. The event encourages students from diverse technological fields to showcase their skills and express their boundless imagination and creativity. Participants can take part in various competitions including Innovat-a-thon, Creatica, Debug.log, and Q?Bit.",
+      "rules": [
+        "Reporting Date & Time: 6th November 2026; 8:30 am",
+        "1 Team per school",
+        "2 Participants per team"
+      ],
+      "brochure": "https://drive.google.com/file/d/1vxhe5SiDN5lBjZKcUF7IeZ-D_q06YA3O/view?usp=drivesdk",
+      "register": "https://forms.gle/1ULbC52iGeH2R1QM7",
+      "contact": {
+        "email": "principal@aiss.amity.edu.in",
+        "phone": "+91 98912 10425"
+      },
+      "id": "alphabit-26-2026-11-06",
+      "source": "1vxhe5SiDN5lBjZKcUF7IeZ-D_q06YA3O"
+    }
+  ]
 }
