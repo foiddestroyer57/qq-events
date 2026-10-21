@@ -2,7 +2,14 @@ name: Update events
 on:
   schedule:
     - cron: "*/5 * * * *"
+  repository_dispatch:
+    types: [brochures-changed]
   workflow_dispatch:
+    inputs:
+      reset_forms:
+        description: "Make NEW forms for every event (old form links are dropped)"
+        type: boolean
+        default: false
 permissions:
   contents: write
 concurrency:
@@ -27,6 +34,7 @@ jobs:
           ADMIN_EMAIL: ${{ secrets.ADMIN_EMAIL }}
           FORM_HELPER_URL: ${{ secrets.FORM_HELPER_URL }}
           FORM_HELPER_KEY: ${{ secrets.FORM_HELPER_KEY }}
+          RESET_FORMS: ${{ github.event.inputs.reset_forms }}
         run: |
           printf '%s' "$SA_JSON" > "$RUNNER_TEMP/key.json"
           GOOGLE_SERVICE_ACCOUNT_JSON="$RUNNER_TEMP/key.json" python auto_update.py
