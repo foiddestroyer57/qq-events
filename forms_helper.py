@@ -11,8 +11,7 @@ DEFAULT_QUESTIONS = [
     {"title": "Consent", "type": "checkbox", "required": True, "options": ["I confirm the details are correct and a parent/guardian agrees to this registration."]},
 ]
 
-SCOPES = ["https://www.googleapis.com/auth/forms.body", "https://www.googleapis.com/auth/forms.responses.readonly",
-          "https://www.googleapis.com/auth/drive.file", "https://www.googleapis.com/auth/spreadsheets"]
+SCOPES = ["https://www.googleapis.com/auth/forms.body", "https://www.googleapis.com/auth/drive.file"]
 
 def _creds():
     from google.oauth2 import service_account
@@ -23,10 +22,6 @@ def services():
     c = _creds()
     forms = build("forms", "v1", credentials=c, discoveryServiceUrl="https://forms.googleapis.com/$discovery/rest?version=v1", static_discovery=False)
     return forms, build("drive", "v3", credentials=c)
-
-def sheets_service():
-    from googleapiclient.discovery import build
-    return build("sheets", "v4", credentials=_creds())
 
 def _item(q, i):
     t, req = q.get("type", "short"), bool(q.get("required"))

@@ -3,6 +3,7 @@
 publishes them straight into events.json. Delete a brochure from the Drive folder and its event disappears."""
 import os, re, time, json, datetime
 import update_events as u
+import forms_helper as fh
 
 EVENTS, REVIEW = os.path.join(u.HERE, "events.json"), os.path.join(u.HERE, "needs_review.json")
 
@@ -10,6 +11,19 @@ def save_if_changed(path, data):
     new = json.dumps(data, indent=2, ensure_ascii=False) + "\n"
     if os.path.exists(path) and open(path, encoding="utf-8").read() == new: return False
     open(path, "w", encoding="utf-8", newline="\n").write(new); return True
+
+def ensure_forms(events):
+    today = datetime.date.today().isoformat()
+    todo = [e for e in events.values() if not e.get("formId") and (not e["date"] or e["date"] >= today)][:5]      # a few per run
+    if not todo: print("forms: nothing to create (every upcoming event already has a form)"); return
+    try: fs, ds = fh.services()
+    except Exception as e: print("FORMS UNAVAILABLE:", str(e)[:200]); return
+    qs = u._load(os.path.join(u.HERE, "form_questions.json"), fh.DEFAULT_QUESTIONS)
+    for ev in todo:
+        try: link, fid = fh.create_form(fs, ds, ev, qs, os.environ.get("ADMIN_EMAIL", ""))
+        except Exception as e: print("FORM FAILED for %s: %s" % (ev["name"], str(e)[:250])); continue
+        if ev.get("register") and not ev.get("organiserLink"): ev["organiserLink"] = ev["register"]
+        ev["register"], ev["formId"] = link, fid; print("FORM CREATED for", ev["name"])
 
 def main():
     svc, client = u.drive(), u.gemini()
@@ -28,12 +42,16 @@ def main():
             review[f["id"]] = {"file": f["id"], "name": f["name"], "reason": "file is over 15 MB - compress it"}; state[f["id"]] = f["modifiedTime"]; continue
         try: ev = u.clean(u.extract(client, u.download(svc, f["id"]), f["mimeType"]), f)
         except Exception as e: print("WILL RETRY %s: %s" % (f["name"], str(e)[:200])); continue      # not marked done -> retried next run
+        old = next((v for v in events.values() if v.get("source") == f["id"]), None)
         events = {k: v for k, v in events.items() if v.get("source") != f["id"]}; state[f["id"]] = f["modifiedTime"]
         if not ev["name"]:
             review[f["id"]] = {"file": f["id"], "name": f["name"], "reason": "no event name found - check the brochure"}; print("NEEDS REVIEW", f["name"]); continue
         if not ev["date"]: print("NO DATE in %s - publishing it as 'date will be announced soon'" % f["name"])
-        review.pop(f["id"], None); ev = {k: v for k, v in ev.items() if not k.startswith("_")}; ev["source"] = f["id"]; events[ev["id"]] = ev
+        review.pop(f["id"], None); ev = {k: v for k, v in ev.items() if not k.startswith("_")}; ev["source"] = f["id"]
+        if old and old.get("formId"): ev.update({k: old[k] for k in ("formId", "register", "organiserLink") if k in old})   # keep the existing form on a re-read
+        events[ev["id"]] = ev
         print("PUBLISHED %s (%s)" % (ev["name"], ev["date"])); time.sleep(5)
+    ensure_forms(events)
     cutoff = (datetime.date.today() - datetime.timedelta(days=30)).isoformat()
     events = {k: v for k, v in events.items() if v.get("source") in live and (not v["date"] or v["date"] >= cutoff)}   # deleted brochure or long-past event -> removed
     review = {k: v for k, v in review.items() if k in live}
