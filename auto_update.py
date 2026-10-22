@@ -3,7 +3,9 @@
 publishes them straight into events.json. Delete a brochure from the Drive folder and its event disappears."""
 import os, re, time, json, datetime
 import update_events as u
-import forms_helper as fh
+import forms_helper as fh, compress_helper as chelp
+
+MAX_BYTES = 15_000_000                  # bigger brochures are shrunk before Gemini reads them
 
 EVENTS, REVIEW = os.path.join(u.HERE, "events.json"), os.path.join(u.HERE, "needs_review.json")
 
@@ -25,6 +27,16 @@ def ensure_forms(events):
         if ev.get("register") and not ev.get("organiserLink"): ev["organiserLink"] = ev["register"]
         ev["register"], ev["formId"] = link, fid; print("FORM CREATED for", ev["name"])
 
+def reset_forms(events):
+    """Tick 'reset_forms' when running the workflow by hand: drops every stored form link so brand-new forms are made."""
+    if os.environ.get("RESET_FORMS", "").strip().lower() != "true": return 0
+    n = 0
+    for ev in events.values():
+        if ev.pop("formId", None):
+            ev["register"] = ev.pop("organiserLink", ""); n += 1      # the brochure's own link (if any) goes back to being the main link
+    print("RESET: removed the old form link from %d event(s) - new forms are made below" % n)
+    return n
+
 def main():
     svc, client = u.drive(), u.gemini()
     raw_id = os.environ["DRIVE_FOLDER_ID"].strip(); m = re.search(r"folders/([\w-]+)", raw_id); fid = m.group(1) if m else raw_id.split("?")[0].strip()
@@ -38,9 +50,15 @@ def main():
         review.pop(k); state.pop(k, None)                      # older "missing date" entries get read again and are now published
     for f in files:
         if state.get(f["id"]) == f["modifiedTime"]: continue
-        if int(f.get("size", 0)) > 15_000_000:
-            review[f["id"]] = {"file": f["id"], "name": f["name"], "reason": "file is over 15 MB - compress it"}; state[f["id"]] = f["modifiedTime"]; continue
-        try: ev = u.clean(u.extract(client, u.download(svc, f["id"]), f["mimeType"]), f)
+        try:
+            data, mime = u.download(svc, f["id"]), f["mimeType"]
+            if len(data) > MAX_BYTES:
+                before = len(data); data, mime = chelp.shrink(data, mime, MAX_BYTES)
+                print("COMPRESSED %s: %.1f MB -> %.1f MB" % (f["name"], before / 1e6, len(data) / 1e6))
+            ev = u.clean(u.extract(client, data, mime), f)
+        except chelp.TooBig as e:
+            review[f["id"]] = {"file": f["id"], "name": f["name"], "reason": "file is over 15 MB and could not be compressed: " + str(e)}; state[f["id"]] = f["modifiedTime"]
+            print("TOO BIG %s: %s" % (f["name"], e)); continue
         except Exception as e: print("WILL RETRY %s: %s" % (f["name"], str(e)[:200])); continue      # not marked done -> retried next run
         old = next((v for v in events.values() if v.get("source") == f["id"]), None)
         events = {k: v for k, v in events.items() if v.get("source") != f["id"]}; state[f["id"]] = f["modifiedTime"]
@@ -51,6 +69,7 @@ def main():
         if old and old.get("formId"): ev.update({k: old[k] for k in ("formId", "register", "organiserLink") if k in old})   # keep the existing form on a re-read
         events[ev["id"]] = ev
         print("PUBLISHED %s (%s)" % (ev["name"], ev["date"])); time.sleep(5)
+    reset_forms(events)
     ensure_forms(events)
     cutoff = (datetime.date.today() - datetime.timedelta(days=30)).isoformat()
     events = {k: v for k, v in events.items() if v.get("source") in live and (not v["date"] or v["date"] >= cutoff)}   # deleted brochure or long-past event -> removed
