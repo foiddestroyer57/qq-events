@@ -55,6 +55,33 @@
       "formId": "1VpP4zf5KPrZgG1dC_BZvgfCnFXrYftgusaCH3_VEbTI"
     },
     {
+      "name": "MODEM Annual Technology Fest",
+      "category": "Technology Fest",
+      "date": "2026-11-03",
+      "venue": "Modern School, Vasant Vihar, Poorvi Marg, New Delhi 110057",
+      "classes": "Grades VI-XII",
+      "fee": "",
+      "deadline": "2026-10-24",
+      "registerOpens": "",
+      "description": "Modern School, Vasant Vihar presents MODEM, an annual inter-school technology fest bringing together young minds from across Delhi NCR. The event features engaging competitions and thought-provoking activities designed to foster critical thinking, collaborative problem-solving, and computational excellence.",
+      "rules": [
+        "Only one team per school, per event is allowed.",
+        "All teams must be accompanied by a teacher.",
+        "Indiscipline and/or non-adherence will invite penalty and/or disqualification.",
+        "Decision of the judges will be final and binding."
+      ],
+      "brochure": "https://drive.google.com/file/d/1gl7OziDO_4S9ajoN-euHCwX1o0LUN1_N/view?usp=drivesdk",
+      "register": "https://docs.google.com/forms/d/e/1FAIpQLSesAgba3L7r8qO9-qszbTrkqiDSA5lYdRTlzp9tHX1L9LZ25Q/viewform",
+      "contact": {
+        "email": "cybersquad.msvv@gmail.com",
+        "phone": "011-26144388"
+      },
+      "id": "modem-annual-technology-fest-2026-11-03",
+      "source": "1gl7OziDO_4S9ajoN-euHCwX1o0LUN1_N",
+      "organiserLink": "https://forms.gle/waZSioQxebpq2UXD9",
+      "formId": "10p-6-85N0bZjnucGWiN1rZbiy3bk53F5aH9fiSstXVk"
+    },
+    {
       "name": "AlphaBit '26",
       "category": "Technology Festival / Tech Fest",
       "date": "2026-11-06",
