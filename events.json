@@ -1,6 +1,26 @@
 {
   "events": [
     {
+      "name": "17th Rajagiri National Business Quiz",
+      "category": "Quiz",
+      "date": "2026-10-24",
+      "venue": "",
+      "classes": "",
+      "fee": "",
+      "deadline": "2026-10-22",
+      "registerOpens": "",
+      "description": "Register for the 17th Rajagiri National Business Quiz and compete for a ₹3,82,000 prize pool. This prestigious business quiz is hosted by Rajagiri College of Social Sciences and Rajagiri Business School. Online preliminary rounds take place on 24 October for schools and 24 & 25 October for college and corporate categories.",
+      "rules": [],
+      "brochure": "https://drive.google.com/file/d/15ytVfKSrZS5lUEHiAkwErkDtwVH_i079/view?usp=drivesdk",
+      "contact": {
+        "email": "atllab@ambiencepublicschool.com"
+      },
+      "id": "17th-rajagiri-national-business-quiz-2026-10-24",
+      "source": "15ytVfKSrZS5lUEHiAkwErkDtwVH_i079",
+      "register": "https://docs.google.com/forms/d/e/1FAIpQLSe-mEZBVCB8FZrRGq3fRLUhysDlXs0Ot5L0HLv8Q6KtUsyOVw/viewform",
+      "formId": "1Hk5bp2QNaMWc3dLVSqq0zqK8-OUIGEQcdA-xFt07RTE"
+    },
+    {
       "name": "FORCE FEST 2K26",
       "category": "Technology and Innovation Festival",
       "date": "2026-10-27",
