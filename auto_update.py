@@ -24,7 +24,6 @@ def ensure_forms(events):
     for ev in todo:
         try: link, fid = fh.create_form(fs, ds, ev, qs, os.environ.get("ADMIN_EMAIL", ""))
         except Exception as e: print("FORM FAILED for %s: %s" % (ev["name"], str(e)[:250])); continue
-        if ev.get("register") and not ev.get("organiserLink"): ev["organiserLink"] = ev["register"]
         ev["register"], ev["formId"] = link, fid; print("FORM CREATED for", ev["name"])
 
 def reset_forms(events):
@@ -33,7 +32,7 @@ def reset_forms(events):
     n = 0
     for ev in events.values():
         if ev.pop("formId", None):
-            ev["register"] = ev.pop("organiserLink", ""); n += 1      # the brochure's own link (if any) goes back to being the main link
+            ev.pop("register", None); ev.pop("organiserLink", None); n += 1
     print("RESET: removed the old form link from %d event(s) - new forms are made below" % n)
     return n
 
@@ -66,7 +65,7 @@ def main():
             review[f["id"]] = {"file": f["id"], "name": f["name"], "reason": "no event name found - check the brochure"}; print("NEEDS REVIEW", f["name"]); continue
         if not ev["date"]: print("NO DATE in %s - publishing it as 'date will be announced soon'" % f["name"])
         review.pop(f["id"], None); ev = {k: v for k, v in ev.items() if not k.startswith("_")}; ev["source"] = f["id"]
-        if old and old.get("formId"): ev.update({k: old[k] for k in ("formId", "register", "organiserLink") if k in old})   # keep the existing form on a re-read
+        if old and old.get("formId"): ev.update({k: old[k] for k in ("formId", "register") if k in old})   # keep the existing form on a re-read
         events[ev["id"]] = ev
         print("PUBLISHED %s (%s)" % (ev["name"], ev["date"])); time.sleep(5)
     reset_forms(events)

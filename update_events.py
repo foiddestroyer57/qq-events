@@ -43,7 +43,7 @@ SYSTEM = ("You extract event details from school event brochures for a children'
 PROMPT = ("Read this event brochure and return ONE JSON object with exactly these keys: name, category, "
           "date (YYYY-MM-DD), venue, classes (eligible classes/age group), fee, deadline (registration deadline, YYYY-MM-DD), "
           "registerOpens (YYYY-MM-DD), description (2-4 sentences using only facts from the brochure), "
-          "rules (array of short strings), register (registration URL only if printed), "
+          "rules (array of short strings), "
           "contact (object with email and phone). Use null for anything not clearly stated.")
 
 
@@ -77,7 +77,7 @@ def clean(raw, file_meta):
           "classes": _txt(raw.get("classes"), 100), "fee": _txt(raw.get("fee"), 100),
           "deadline": _date(raw.get("deadline"), "deadline", w), "registerOpens": _date(raw.get("registerOpens"), "registerOpens", w),
           "description": _txt(raw.get("description"), 900), "rules": [_txt(r, 250) for r in rules[:15] if r],
-          "brochure": _url(file_meta.get("webViewLink")), "register": _url(raw.get("register")),
+          "brochure": _url(file_meta.get("webViewLink")),
           "contact": {"email": _txt(c.get("email"), 100), "phone": _txt(c.get("phone"), 40)}}
     for k in ("email", "phone"):
         if not ev["contact"][k]: ev["contact"].pop(k)
