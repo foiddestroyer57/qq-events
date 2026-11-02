@@ -45,4 +45,8 @@ jobs:
           git config user.name "qq-bot"
           git config user.email "qq-bot@users.noreply.github.com"
           git add events.json processed_files.json needs_review.json
-          git diff --cached --quiet || (git commit -m "Update events" && git push)
+          if ! git diff --cached --quiet; then
+            git commit -m "Update events"
+            git pull --rebase origin main || { git rebase --abort; echo "Repo changed during the run - will redo on the next run"; exit 0; }
+            git push
+          fi
