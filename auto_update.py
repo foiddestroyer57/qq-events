@@ -8,11 +8,35 @@ import forms_helper as fh, compress_helper as chelp
 MAX_BYTES = 15_000_000                  # bigger brochures are shrunk before Gemini reads them
 
 EVENTS, REVIEW = os.path.join(u.HERE, "events.json"), os.path.join(u.HERE, "needs_review.json")
+OVERRIDES = os.path.join(u.HERE, "overrides.json")      # written by the admin Google Form (Apps Script): {"<event id>": {"date": "2026-12-01", ...}}
+EDITABLE = {"name": 120, "date": 10, "venue": 200, "classes": 120, "fee": 120, "deadline": 10, "registerOpens": 10, "description": 1500}
 
 def save_if_changed(path, data):
     new = json.dumps(data, indent=2, ensure_ascii=False) + "\n"
     if os.path.exists(path) and open(path, encoding="utf-8").read() == new: return False
     open(path, "w", encoding="utf-8", newline="\n").write(new); return True
+
+def apply_overrides(events):
+    """Admin edits win over the brochure. The brochure's own value is remembered in "_orig", so deleting an
+    override puts the brochure value back, and re-reading a brochure never loses an admin edit."""
+    ovs = u._load(OVERRIDES, {})
+    if not isinstance(ovs, dict): ovs = {}
+    for ev in events.values():
+        raw = ovs.get(ev["id"]); raw = raw if isinstance(raw, dict) else {}
+        ov = {}
+        for k, v in raw.items():
+            if k not in EDITABLE or not isinstance(v, str) or not v.strip(): continue
+            v = v.strip()[:EDITABLE[k]]
+            if k in ("date", "deadline", "registerOpens") and not re.fullmatch(r"\d{4}-\d{2}-\d{2}", v): continue
+            ov[k] = v
+        orig = dict(ev.get("_orig") or {})
+        for k in [k for k in orig if k not in ov]: ev[k] = orig.pop(k)            # override removed -> brochure value comes back
+        for k, v in ov.items():
+            if k not in orig: orig[k] = ev.get(k, "")
+            if ev.get(k) != v: print("OVERRIDE %s: %s -> %s" % (ev["name"], k, v))
+            ev[k] = v
+        if orig: ev["_orig"] = orig
+        else: ev.pop("_orig", None)
 
 def ensure_forms(events):
     today = datetime.date.today().isoformat()
@@ -68,6 +92,7 @@ def main():
         if old and old.get("formId"): ev.update({k: old[k] for k in ("formId", "register") if k in old})   # keep the existing form on a re-read
         events[ev["id"]] = ev
         print("PUBLISHED %s (%s)" % (ev["name"], ev["date"])); time.sleep(5)
+    apply_overrides(events)
     reset_forms(events)
     ensure_forms(events)
     cutoff = (datetime.date.today() - datetime.timedelta(days=30)).isoformat()
