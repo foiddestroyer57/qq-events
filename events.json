@@ -1,30 +1,6 @@
 {
   "events": [
     {
-      "name": "FORCE FEST 2K26",
-      "category": "Technology and Innovation Festival",
-      "date": "2026-10-27",
-      "venue": "Apeejay School, Panchsheel Park",
-      "classes": "III - XII",
-      "fee": "",
-      "deadline": "2026-10-15",
-      "registerOpens": "",
-      "description": "Apeejay School, Panchsheel Park presents the 25th edition of FORCE FEST 2K26, a flagship technology and innovation festival themed 'TechnoGenesis: Evolution with Technology'. The festival provides exceptionally talented students a dynamic platform to explore, create, innovate, and showcase their technological prowess across various exciting competitions. Events range from PC gaming and block coding to robotics, quizzes, app development, and more.",
-      "rules": [
-        "Kindly confirm participation in the respective events by October 15, 2026.",
-        "Detailed list of events, schedule, rules, and regulations apply to the various competitions."
-      ],
-      "brochure": "https://drive.google.com/file/d/19O8jaRIb15OfVUegg-QDu3rK4dxzaYdk/view?usp=drivesdk",
-      "register": "https://docs.google.com/forms/d/e/1FAIpQLSfQBMwiR1xgLUvsYttIuoCfocFc60vwy7hED8XJ73kOh2_oLA/viewform",
-      "contact": {
-        "email": "forceapj@gmail.com",
-        "phone": "+91 98715 28385"
-      },
-      "id": "force-fest-2k26-2026-10-27",
-      "source": "19O8jaRIb15OfVUegg-QDu3rK4dxzaYdk",
-      "formId": "1XtCaO2mPqKLHnPLgSjhH1KsKnE4gSQglFzRZRek4Rf8"
-    },
-    {
       "name": "Technophilia 7.0 - Autonomous AI Eco Agents",
       "category": "Technology Competition",
       "date": "2026-10-31",
